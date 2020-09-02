@@ -2,20 +2,41 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { NavigationContainer } from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+
+import Home from './src/pages/Home'
+import Sobre from './src/pages/Sobre'
+import Perfil from './src/pages/Perfil'
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function tabs () {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={Home}/>
+      <Tab.Screen name="Sobre" component={Sobre}/>
+    </Tab.Navigator>
+
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen 
+        name="Home" 
+        component={tabs}
+        options = {{
+          title: 'Bem-Vindo'
+        }} />
+       
+        <Stack.Screen name="Perfil" component={Perfil}/>
+        
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
