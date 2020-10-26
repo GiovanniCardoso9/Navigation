@@ -1,2 +1,2 @@
 # Navigation
-Repositório aprendendo react navigation
+Estudando React Navigation
